@@ -28,6 +28,8 @@ class TPinterface: public CGFinterface {
 
 		void loadPecasPlayer1(float deltaX, float deltaY);
 		void loadPecasPlayer2(float deltaX, float deltaY);
+		void loadSombraPlayer1();
+		void loadSombraPlayer2();
 		void processPassiveMouseMoved(int x,int y);
 };
 

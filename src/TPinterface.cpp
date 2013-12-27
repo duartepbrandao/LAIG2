@@ -262,14 +262,14 @@ void TPinterface::processHits (GLint hits, GLuint buffer[])
 		TwixtSocket::envia(s, strlen(s));
 		char ans[128];
 		TwixtSocket::recebe(ans);
-		
+
 		/*char s2[9000];
 		sprintf (s2, "replaceMatrix(%s, %d, %d,%c,_, _, 0).\n", board, selected[0]+1, selected[1]+1,letra);
 		TwixtSocket::envia(s2, strlen(s2));
 		char ans2[9000];
 		TwixtSocket::recebe(ans2);
 		strncpy(board, ans2, 9000);*/
-		
+
 		if(ans[0]=='0'){
 			if(num==1){
 				loadPecasPlayer1(deltaX, deltaY);
@@ -313,21 +313,55 @@ void TPinterface::processHits2 (GLint hits, GLuint buffer[])
 	{
 		// this should be replaced by code handling the picked object's ID's (stored in "selected"), 
 		// possibly invoking a method on the scene class and passing "selected" and "nselected"
-		printf("Picked ID's: ");
-		for (int i=0; i<nselected; i++){
-			printf("%d ",selected[i]);
-		}
 		float deltaX=selected[0]*2.57*1.5+3.05+1.5/2;
 		float deltaY=selected[1]*2.57*1.5+3.1+1.5/2;
+
+		if(((LightingScene*) scene)->pecas.size()>=2){
+			((LightingScene*) scene)->sombra=new Peca(((LightingScene*) scene)->pecas[((LightingScene*) scene)->pecas.size()-2]);
+		}else if(((LightingScene*) scene)->pecas.size()==1){
+			loadSombraPlayer2();
+		}else{
+			loadSombraPlayer1();
+		}
 
 		((LightingScene*) scene)->sombra->setPosx(deltaX);
 
 		((LightingScene*) scene)->sombra->setPosy(deltaY);
-
-		printf("\n");
 	}
-	else
-		printf("Nothing selected while picking \n");	
+}
+
+void TPinterface::loadSombraPlayer1(){
+	switch(((LightingScene*) scene)->app){
+	case 0:
+		((LightingScene*) scene)->sombra=new Peca(c1);
+		break;
+	case 1:
+		((LightingScene*) scene)->sombra=new Peca(m1);
+		break;
+	case 2:
+		((LightingScene*) scene)->sombra=new Peca(d1);
+		break;
+	case 3:
+		((LightingScene*) scene)->sombra=new Peca(a1);
+		break;
+	}
+}
+
+void TPinterface::loadSombraPlayer2(){
+	switch(((LightingScene*) scene)->app){
+	case 0:
+		((LightingScene*) scene)->sombra=new Peca(c2);
+		break;
+	case 1:
+		((LightingScene*) scene)->sombra=new Peca(m2);
+		break;
+	case 2:
+		((LightingScene*) scene)->sombra=new Peca(d2);
+		break;
+	case 3:
+		((LightingScene*) scene)->sombra=new Peca(a2);
+		break;
+	}
 }
 
 void TPinterface::loadPecasPlayer1(float deltaX, float deltaY){
