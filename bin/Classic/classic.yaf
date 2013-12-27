@@ -10,10 +10,10 @@
      
     <!-- bloco de camaras: o atributo "initial" identifica a camara/ponto de vista inicial --> 
     <cameras initial="camera1" >
-        <perspective id="camera1" near="-20" far="20" angle="40.0" pos="20 20 20" target="0.0 0.0 0.0" />
-		<ortho id="camera2" near="1.0" far="2.0" left="1" right="1" top="1" bottom="1" />
-		<perspective id="camera3" near="0.1" far="300" angle="35" pos="30 10 35" target="0 0 0" /> 
-		<ortho id="camera4" near="-20" far="500.0" left="0.0" right="10.0" top="10.0" bottom="0.0" /> 
+        <perspective id="camera1" near="0.5" far="10000" angle="35" pos="70 40 20" target="20 0 20" /> 
+		<ortho id="camera3" near="1.0" far="2.0" left="1" right="1" top="1" bottom="1" />
+        <perspective id="camera2" near="0.5" far="10000" angle="35" pos="20 40 20" target="20 0 20" /> 
+		<ortho id="camera4" near="-20" far="500.0" left="0.1" right="0.1" top="0.1" bottom="0.1" /> 
     </cameras> 
    
 
