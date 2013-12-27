@@ -120,13 +120,10 @@ void LightingScene::display()
 	}
 	
 	//peca preview
-	glEnable(GL_BLEND); 
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glPushMatrix();
 	glTranslated(sombra->getPosX(), 0.0, sombra->getPosY());
 	sombra->draw();
 	glPopMatrix();
-	glDisable(GL_BLEND);
 
 
 	// Draw axis
