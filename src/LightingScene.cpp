@@ -43,7 +43,7 @@ LightingScene::LightingScene(vector<Light*> lights, Globals* globals,vector<Came
 	d2 = new Peca("DragonBall/dragonball.yaf", 2, "DragonBall/player2.jpg", "DragonBall/player2.jpg");
 	a1 = new Peca("AngryBirds/red.obj","AngryBirds/angrybirds.yaf", 1, "AngryBirds/red.jpg", "AngryBirds/base.jpg");
 	a2 = new Peca("AngryBirds/pig.obj","AngryBirds/angrybirds.yaf", 2, "AngryBirds/pig.jpg", "AngryBirds/base_2.jpg");
-	sombra = new Peca(c1);
+	sombra = new Peca("Classic/classic.yaf", 1, "Classic/player1.jpg", "Classic/player1.jpg");
 	//Para o picking
 	object=new ExampleObject();
 }
@@ -256,6 +256,12 @@ void LightingScene::loadPecaTheme(){
 			}else{
 				pecas[i]->changePecaTheme(a2);
 			}
+		}
+	}
+	for(int i=0;i<pecas.size();i++){
+		if(sombra->getPlayerNumber()==pecas[i]->getPlayerNumber()){
+			sombra=new Peca(pecas[i]);
+			break;
 		}
 	}
 }

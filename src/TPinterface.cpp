@@ -104,6 +104,7 @@ void TPinterface::processMouse(int button, int state, int x, int y)
 }
 
 void TPinterface::processPassiveMouseMoved(int x,int y){
+	CGFinterface::processPassiveMouseMoved(x,y);
 	performPicking2(x,y);
 }
 
@@ -263,9 +264,10 @@ void TPinterface::processHits (GLint hits, GLuint buffer[])
 		char ans[128];
 		TwixtSocket::recebe(ans);
 
-		/*char s2[9000];
+		char s2[10000];
 		sprintf (s2, "replaceMatrix(%s, %d, %d,%c,_, _, 0).\n", board, selected[0]+1, selected[1]+1,letra);
-		TwixtSocket::envia(s2, strlen(s2));
+		printf ("\n\n\n\n s2 = \n\n\n\n\n\n %s", s2);
+		/*TwixtSocket::envia(s2, strlen(s2));
 		char ans2[9000];
 		TwixtSocket::recebe(ans2);
 		strncpy(board, ans2, 9000);*/
@@ -280,6 +282,14 @@ void TPinterface::processHits (GLint hits, GLuint buffer[])
 			printf("%s\n", ans);
 		}
 		//end
+
+		if(((LightingScene*) scene)->pecas.size()>=2){
+			((LightingScene*) scene)->sombra=new Peca(((LightingScene*) scene)->pecas[((LightingScene*) scene)->pecas.size()-2]);
+		}else if(((LightingScene*) scene)->pecas.size()==1){
+			loadSombraPlayer2();
+		}else{
+			loadSombraPlayer1();
+		}
 
 		printf("\n");
 	}
@@ -316,11 +326,7 @@ void TPinterface::processHits2 (GLint hits, GLuint buffer[])
 		float deltaX=selected[0]*2.57*1.5+3.05+1.5/2;
 		float deltaY=selected[1]*2.57*1.5+3.1+1.5/2;
 
-		if(((LightingScene*) scene)->pecas.size()>=2){
-			((LightingScene*) scene)->sombra=new Peca(((LightingScene*) scene)->pecas[((LightingScene*) scene)->pecas.size()-2]);
-		}else if(((LightingScene*) scene)->pecas.size()==1){
-			loadSombraPlayer2();
-		}else{
+		if(((LightingScene*) scene)->pecas.size()==0){
 			loadSombraPlayer1();
 		}
 
