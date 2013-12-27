@@ -333,16 +333,16 @@ void TPinterface::processHits2 (GLint hits, GLuint buffer[])
 void TPinterface::loadSombraPlayer1(){
 	switch(((LightingScene*) scene)->app){
 	case 0:
-		((LightingScene*) scene)->sombra=new Peca(c1);
+		((LightingScene*) scene)->sombra=c1;
 		break;
 	case 1:
-		((LightingScene*) scene)->sombra=new Peca(m1);
+		((LightingScene*) scene)->sombra=m1;
 		break;
 	case 2:
-		((LightingScene*) scene)->sombra=new Peca(d1);
+		((LightingScene*) scene)->sombra=d1;
 		break;
 	case 3:
-		((LightingScene*) scene)->sombra=new Peca(a1);
+		((LightingScene*) scene)->sombra=a1;
 		break;
 	}
 }
@@ -350,16 +350,16 @@ void TPinterface::loadSombraPlayer1(){
 void TPinterface::loadSombraPlayer2(){
 	switch(((LightingScene*) scene)->app){
 	case 0:
-		((LightingScene*) scene)->sombra=new Peca(c2);
+		((LightingScene*) scene)->sombra=c2;
 		break;
 	case 1:
-		((LightingScene*) scene)->sombra=new Peca(m2);
+		((LightingScene*) scene)->sombra=m2;
 		break;
 	case 2:
-		((LightingScene*) scene)->sombra=new Peca(d2);
+		((LightingScene*) scene)->sombra=d2;
 		break;
 	case 3:
-		((LightingScene*) scene)->sombra=new Peca(a2);
+		((LightingScene*) scene)->sombra=a2;
 		break;
 	}
 }

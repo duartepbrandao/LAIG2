@@ -50,8 +50,6 @@ LightingScene::LightingScene(vector<Light*> lights, Globals* globals,vector<Came
 
 void LightingScene::init() 
 {
-
-
 	//GLOBALS
 	glClearColor (globals->getBackground(0), globals->getBackground(1), globals->getBackground(2), globals->getBackground(3));
 	glPolygonMode(GL_FRONT_AND_BACK,globals->getDrawMode());
@@ -120,9 +118,9 @@ void LightingScene::display()
 		lights[i]->draw();
 		lights[i]->update();
 	}
-	glEnable(GL_BLEND);
 	
 	//peca preview
+	glEnable(GL_BLEND); 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glPushMatrix();
 	glTranslated(sombra->getPosX(), 0.0, sombra->getPosY());
