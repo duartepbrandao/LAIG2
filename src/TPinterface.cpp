@@ -320,47 +320,9 @@ void TPinterface::processHits2 (GLint hits, GLuint buffer[])
 		float deltaX=selected[0]*2.57*1.5+3.05+1.5/2;
 		float deltaY=selected[1]*2.57*1.5+3.1+1.5/2;
 
+		((LightingScene*) scene)->sombra->setPosx(deltaX);
 
-		//Verifica se é possível jogar numa determinada posicao
-		int num=1;
-		char letra;
-		if(!((LightingScene*) scene)->pecas.empty()){
-			num=((LightingScene*) scene)->pecas[((LightingScene*) scene)->pecas.size()-1]->getPlayerNumber();
-			if(num==2){
-				num=1;
-				letra='x';
-			}else if(num==1){
-				num=2;
-				letra='y';
-			}
-		}else{
-			num=1;
-			letra='x';
-		}
-
-		char s[100];
-		sprintf (s, "verify_place(%d, %d,_, _, %d, 12).\n", selected[0]+1, selected[1]+1, num);
-		TwixtSocket::envia(s, strlen(s));
-		char ans[128];
-		TwixtSocket::recebe(ans);
-		
-		/*char s2[9000];
-		sprintf (s2, "replaceMatrix(%s, %d, %d,%c,_, _, 0).\n", board, selected[0]+1, selected[1]+1,letra);
-		TwixtSocket::envia(s2, strlen(s2));
-		char ans2[9000];
-		TwixtSocket::recebe(ans2);
-		strncpy(board, ans2, 9000);*/
-		
-		if(ans[0]=='0'){
-			if(num==1){
-				loadPecasPlayer1(deltaX, deltaY);
-			}else if(num==2){
-				loadPecasPlayer2(deltaX, deltaY);
-			}
-		}else{
-			printf("%s\n", ans);
-		}
-		//end
+		((LightingScene*) scene)->sombra->setPosy(deltaY);
 
 		printf("\n");
 	}
