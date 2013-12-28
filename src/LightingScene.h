@@ -38,6 +38,7 @@ public:
 	//ANIMATIONS
 	map<string, Animation*> animations;
 	Animation* animation;
+	
 
 	//Twixt
 	Node* n;
@@ -48,6 +49,7 @@ public:
 	vector<Peca*> pecas;
 	vector<LightingScene*> themes;
 	void addthemes(LightingScene* ls){themes.push_back(ls);}
+	float alturaPreview;
 
 	Globals* getGlobals(){return globals;}
 	vector<Camera*> getCameras(){return cameras;}

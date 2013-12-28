@@ -345,6 +345,10 @@ void TPinterface::processHits2 (GLint hits, GLuint buffer[])
 		
 		((LightingScene*) scene)->sombra->setPosx(deltaX);
 		((LightingScene*) scene)->sombra->setPosy(deltaY);
+
+	//	((LightingScene*) scene)->previewAnimation->clearPoints();
+
+
 	}
 }
 

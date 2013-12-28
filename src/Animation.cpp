@@ -50,6 +50,10 @@ void LinearAnimation::setRot(float rot){
 	this->rot=rot;
 }
 
+void LinearAnimation::clearPoints(){
+	controlPoints.clear();
+}
+
 void LinearAnimation::update(unsigned long sysTm){
 	if (getDoReset()){
 		calculate();

@@ -68,7 +68,7 @@ public:
 	void setDeltaY(float deltaY);
 	void setDeltaZ(float deltaZ);
 	void setRot(float rot);
-
+	void clearPoints();
 };
 
 #endif
