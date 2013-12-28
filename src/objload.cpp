@@ -1494,6 +1494,9 @@ Peca::Peca(Peca *p){
 
 	base_app = new CGFappearance(ambA,difA,specA,shininessA);
 	base_app->setTexture(base_name);
+
+	posx=-1000;
+	posy=-1000;
 }
 
 Peca::Peca(std::string theme, int playerNumber, std::string player, std::string base_name){
@@ -1511,6 +1514,8 @@ Peca::Peca(std::string theme, int playerNumber, std::string player, std::string 
 
 	base_app = new CGFappearance(ambA,difA,specA,shininessA);
 	base_app->setTexture(base_name);
+	posx=-1000;
+	posy=-1000;
 }
 	
 Peca::Peca(char* filename, std::string theme, int playerNumber, std::string player, std::string base_name){
@@ -1530,6 +1535,8 @@ Peca::Peca(char* filename, std::string theme, int playerNumber, std::string play
 
 	base_app = new CGFappearance(ambA,difA,specA,shininessA);
 	base_app->setTexture(base_name);
+	posx=-1000;
+	posy=-1000;
 }
 	
 void Peca::changePecaTheme(Peca* p){

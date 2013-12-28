@@ -68,11 +68,11 @@ void TwixtSocket::recebe(char *ans) {
 		pos++;
 	}
 	ans[pos] = 0;
-	cout << "prolog answered: " << ans << endl;
+	//cout << "prolog answered: " << ans << endl;
 }
 
 void TwixtSocket::quit() {
-	cout << "Asking prolog to quit" << endl;
+	//cout << "Asking prolog to quit" << endl;
 	char buff[] = "quit.\n";
 	envia(buff, 6);
 	char ans[128];

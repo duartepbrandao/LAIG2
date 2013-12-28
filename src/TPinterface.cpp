@@ -19,10 +19,17 @@ TPinterface::TPinterface()
 
 	char *s="createBoard(12,_).\n";
 	TwixtSocket::envia(s, strlen(s));
-	char ans[9000];
+	char ans[8692];
 	TwixtSocket::recebe(ans);
-	strncpy(board, ans, 9000);
-	strncpy(boardTemp, ans, 9000);
+	for(int i=0;i<8692;i++){
+		if(ans[i]!='.'){
+			board[i]=ans[i];
+			boardTemp[i]=ans[i];
+		}else{
+			board[i]='\0';
+			boardTemp[i]='\0';
+		}
+	}
 }
 
 void TPinterface::initGUI()
@@ -207,7 +214,7 @@ void TPinterface::performPicking2(int x, int y)
 	processHits2(hits, selectBuf);
 }
 
-void TPinterface::processHits (GLint hits, GLuint buffer[]) 
+void TPinterface::processHits (GLint hits, GLuint buffer[])
 {
 	GLuint *ptr = buffer;
 	GLuint mindepth = 0xFFFFFFFF;
@@ -264,13 +271,17 @@ void TPinterface::processHits (GLint hits, GLuint buffer[])
 		char ans[128];
 		TwixtSocket::recebe(ans);
 
-		char s2[10000];
-		sprintf (s2, "replaceMatrix(%s, %d, %d,%c,_, _, 0).\n", board, selected[0]+1, selected[1]+1,letra);
-		printf ("\n\n\n\n s2 = \n\n\n\n\n\n %s", s2);
-		/*TwixtSocket::envia(s2, strlen(s2));
-		char ans2[9000];
+		char s2[8727];
+		sprintf (s2, "replaceMatrix(%s, %d, %d,'%c',_, _, 0).\n", board, selected[0]+1, selected[1]+1,letra);
+		TwixtSocket::envia(s2, strlen(s2));
+		char ans2[8800];
 		TwixtSocket::recebe(ans2);
-		strncpy(board, ans2, 9000);*/
+		//printf ("\nans2 = %s\n", ans2);
+
+		int res;
+		sscanf(ans2,"[%[^|]|%d].", board,&res);
+		printf ("\board = %s\n", board);
+		printf ("\res = %d\n", res);
 
 		if(ans[0]=='0'){
 			if(num==1){
@@ -329,9 +340,8 @@ void TPinterface::processHits2 (GLint hits, GLuint buffer[])
 		if(((LightingScene*) scene)->pecas.size()==0){
 			loadSombraPlayer1();
 		}
-
+		
 		((LightingScene*) scene)->sombra->setPosx(deltaX);
-
 		((LightingScene*) scene)->sombra->setPosy(deltaY);
 	}
 }
