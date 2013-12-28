@@ -82,6 +82,11 @@ void TPinterface::initGUI()
 	themeslistbox->add_item(1, "mario");
 	themeslistbox->add_item(2, "dragon ball");
 	themeslistbox->add_item(3, "angry birds");
+
+	addColumn();
+	GLUI_Panel *gamePanel= addPanel("Options",1);
+	addButtonToPanel(gamePanel,"Undo",5);
+
 }
 
 void TPinterface::processGUI(GLUI_Control *ctrl)
@@ -97,6 +102,8 @@ void TPinterface::processGUI(GLUI_Control *ctrl)
 	case 4:
 		((LightingScene*) scene)->appChoose=false;
 		break;
+	case 5:
+		((LightingScene*)scene)->undo();
 	};
 }
 
