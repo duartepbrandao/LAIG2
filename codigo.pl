@@ -35,8 +35,13 @@ parse_input(verify_place(Linha1, Coluna1,Linha, Coluna, Player, BoardSize), Answ
 parse_input(replaceMatrix(Lista, Linha, Coluna,Letra,ListaC2, Bool, 0), [A|As]) :-
 	replaceMatrix(Lista, Linha, Coluna,Letra,ListaC2, Bool, 0), A=ListaC2+'', As=Bool,!.
 	
+<<<<<<< HEAD
 parse_input(replaceMatrix(Lista, Linha, Coluna,Letra,ListaC2, Bool, 1), Answer) :-
 	replaceMatrix(Lista, Linha, Coluna,Letra,ListaC2, Bool, 1), Answer=ListaC2, show_board(Answer),!.
+=======
+parse_input(verify_line(Lista, Lista2, ListaC, Linha, Coluna, X, Value, ListaTeste, ListaTesteCT, BoardSize), [A|As]) :-
+	verify_line(Lista, Lista2, ListaC, Linha, Coluna, X, Value, ListaTeste, ListaTesteCT, BoardSize, As), A=ListaTeste+''+ListaTesteCT,!.
+>>>>>>> master
 
 parse_input(quit, ok-bye) :- !.
 
@@ -73,8 +78,8 @@ game_mode('ComputerVsComputer').
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Define qual o player e a respectiva letra do mesmo
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%player(1, 'x', 'X').
-%player(2, 'y', 'Y').
+player(1, 'x', 'X').
+player(2, 'y', 'Y').
 
 %%%%%%%%%%%%%
 %Fazer Jogada
@@ -208,8 +213,8 @@ verify_list([H|_], 0, _, LetraM, Bool,2):-
 	(Bool is 1)).
 	
 
-verify_line(_,Lista2, ListaC, _,_,_, 0,ListaTeste, ListaTesteCT, _):-ListaC = Lista2, ListaTesteCT=ListaTeste.
-verify_line(Lista, Lista2, ListaC, Linha, Coluna, X, Value, ListaTeste, ListaTesteCT, BoardSize):-
+verify_line(_,Lista2, ListaC, _,_,_, 0,ListaTeste, ListaTesteCT, _,_):-ListaC = Lista2, ListaTesteCT=ListaTeste.
+verify_line(Lista, Lista2, ListaC, Linha, Coluna, X, Value, ListaTeste, ListaTesteCT, BoardSize, Ans):-
 	Value>0, 
 	%write('Value ='),write(Value), nl,
 	Value1 is Value-1,
@@ -223,13 +228,13 @@ verify_line(Lista, Lista2, ListaC, Linha, Coluna, X, Value, ListaTeste, ListaTes
 		((Bool is 1,Bool1 is 1,
 			draw_temp(ListaTeste,Linha, Coluna,Linha2, Coluna2, LetraM, ListaTesteCT1),
 			verify_matrix(ListaTeste, Linha3, Coluna3, _,LetraM,  Bool2,2),
-			verify_matrix(ListaTesteCT1, Linha3, Coluna3, _,LetraM,  Bool3,1),
+			verify_matrix(ListaTesteCT1, Linha3, Coluna3, _,LetraM,  Bool3,1), Ans=Bool2+Bool3,
 			((Bool2 is 1, Bool3 is 1, draw_line(Lista2,Linha, Coluna,Linha2, Coluna2,Linha3, Coluna3, LetraM, ListaCT));
 			(Bool2 is 0, ListaCT = Lista2);(Bool3 is 0, ListaCT = Lista2)));
 		(Bool is 0, ListaCT = Lista2, ListaTesteCT1=ListaTeste); (Bool1 is 0, ListaCT = Lista2, ListaTesteCT1=ListaTeste)));
 	(Coluna2 < 4, ListaCT = Lista2, ListaTesteCT1=ListaTeste); (Coluna2 > 3 + (BoardSize - 1) * 8 + 1, ListaCT = Lista2, ListaTesteCT1=ListaTeste);
 	(Linha2 > (BoardSize + 1) * 2 - 1, ListaCT = Lista2, ListaTesteCT1=ListaTeste); (Linha2 < 2, ListaCT = Lista2, ListaTesteCT1=ListaTeste)),
-verify_line(Lista, ListaCT, ListaC, Linha, Coluna, X, Value1, ListaTesteCT1, ListaTesteCT, BoardSize).
+verify_line(Lista, ListaCT, ListaC, Linha, Coluna, X, Value1, ListaTesteCT1, ListaTesteCT, BoardSize, Ans).
 	
 draw_line(Lista, Linha, Coluna, Linha2, Coluna2,Linha3, Coluna3, LetraM, ListaCT):-
 	replaceMatrix(Lista,Linha2, Coluna2, LetraM, ListaCT1, _, 1),

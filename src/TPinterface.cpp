@@ -278,7 +278,11 @@ void TPinterface::processHits (GLint hits, GLuint buffer[])
 		char ans[128];
 		TwixtSocket::recebe(ans);
 
+<<<<<<< HEAD
 		char s2[8800];
+=======
+		char s2[8727];
+>>>>>>> master
 		sprintf (s2, "replaceMatrix(%s, %d, %d,'%c',_, _, 0).\n", board, (selected[0]+1)*2, (selected[1])*8+4,letra);
 		TwixtSocket::envia(s2, strlen(s2));
 		char ans2[8800];
@@ -302,6 +306,18 @@ void TPinterface::processHits (GLint hits, GLuint buffer[])
 			printf("%s\n", ans);
 		}
 		//end
+
+		/*char s3[26112];
+		sprintf (s3, "verify_line(%s, %s, %s, %d, %d, '%c', 8, _, _, 12).\n", board, board, boardTemp, (selected[0]+1)*2, (selected[1]+1)*8+4,letra);
+		printf("\n\n\ns3 = \n\n\n%s\n\n", s3);*/
+		//TwixtSocket::envia(s3, strlen(s3));
+		//char ans3[50000];
+		//TwixtSocket::recebe(ans3);
+		//printf("\n\n\n\n ans3 = \n\n\n\n%s", ans3);
+
+		/*char tmp1[20];
+		sscanf(ans2,"[%[^+]+''|%[^]]].", board, tmp1);
+		int res = atoi(tmp1);*/
 
 		if(((LightingScene*) scene)->pecas.size()>=2){
 			((LightingScene*) scene)->sombra=new Peca(((LightingScene*) scene)->pecas[((LightingScene*) scene)->pecas.size()-2]);
@@ -352,6 +368,10 @@ void TPinterface::processHits2 (GLint hits, GLuint buffer[])
 		
 		((LightingScene*) scene)->sombra->setPosx(deltaX);
 		((LightingScene*) scene)->sombra->setPosy(deltaY);
+
+	//	((LightingScene*) scene)->previewAnimation->clearPoints();
+
+
 	}
 }
 

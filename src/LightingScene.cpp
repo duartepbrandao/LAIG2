@@ -47,6 +47,8 @@ LightingScene::LightingScene(vector<Light*> lights, Globals* globals,vector<Came
 	sombra = new Peca(c1);
 	//Para o picking
 	object=new ExampleObject();
+	alturaPreview=0;
+	//previewAnimation=new LinearAnimation("1",1);
 }
 
 void LightingScene::init() 
@@ -122,7 +124,7 @@ void LightingScene::display()
 	
 	//peca preview
 	glPushMatrix();
-	glTranslated(sombra->getPosX(), 0.0, sombra->getPosY());
+	glTranslated(sombra->getPosX(), alturaPreview, sombra->getPosY());
 	sombra->draw();
 	glPopMatrix();
 
@@ -354,6 +356,7 @@ void LightingScene::drawAllThings(string id){
 }
 
 void LightingScene::update(unsigned long sysTm){
+	alturaPreview=alturaPreview+0.1;
 	map<string,Node*>:: iterator it=scene.begin();
 	while(it!=scene.end()){
 		if(it->second->getAnimID() != ""){
@@ -365,6 +368,9 @@ void LightingScene::update(unsigned long sysTm){
 			it->second->getPrimitives()[i]->update(sysTm); // Para o movimento nos shaders
 		}
 		it++;
+	}
+	if (alturaPreview>2)
+	{alturaPreview=0;
 	}
 }
 
