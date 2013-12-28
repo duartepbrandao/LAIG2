@@ -279,22 +279,24 @@ void TPinterface::processHits (GLint hits, GLuint buffer[])
 		TwixtSocket::recebe(ans);
 
 		char s2[8727];
-		sprintf (s2, "replaceMatrix(%s, %d, %d,'%c',_, _, 0).\n", board, selected[0]+1, selected[1]+1,letra);
+		sprintf (s2, "replaceMatrix(%s, %d, %d,'%c',_, _, 0).\n", board, (selected[0]+1)*2, (selected[1]+1)*8+4,letra);
 		TwixtSocket::envia(s2, strlen(s2));
 		char ans2[8800];
 		TwixtSocket::recebe(ans2);
-		//printf ("\nans2 = %s\n", ans2);
 
-		int res;
-		sscanf(ans2,"[%[^|]|%d].", board,&res);
-		printf ("\board = %s\n", board);
-		printf ("\res = %d\n", res);
+		char tmp1[20];
+		sscanf(ans2,"[%[^+]+''|%[^]]].", board, tmp1);
+		int res = atoi(tmp1);
 
 		if(ans[0]=='0'){
-			if(num==1){
-				loadPecasPlayer1(deltaX, deltaY);
-			}else if(num==2){
-				loadPecasPlayer2(deltaX, deltaY);
+			if(res==1){
+				if(num==1){
+					loadPecasPlayer1(deltaX, deltaY);
+				}else if(num==2){
+					loadPecasPlayer2(deltaX, deltaY);
+				}
+			}else{
+				printf("Nao pode jogar por cima de outras pecas...Jogue outra vez");
 			}
 		}else{
 			printf("%s\n", ans);

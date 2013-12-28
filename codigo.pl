@@ -33,7 +33,7 @@ parse_input(verify_place(Linha1, Coluna1,Linha, Coluna, Player, BoardSize), Answ
 	verify_place(Linha1, Coluna1,Linha, Coluna, Player, BoardSize, Answer),!.
 	
 parse_input(replaceMatrix(Lista, Linha, Coluna,Letra,ListaC2, Bool, 0), [A|As]) :-
-	replaceMatrix(Lista, Linha, Coluna,Letra,ListaC2, Bool, 0), A=ListaC2, As=Bool,!.
+	replaceMatrix(Lista, Linha, Coluna,Letra,ListaC2, Bool, 0), A=ListaC2+'', As=Bool,!.
 
 parse_input(quit, ok-bye) :- !.
 
@@ -147,10 +147,9 @@ replaceList([H|T], Index, X, [H|R], Bool, Bool2):-
 
 replaceList([H|T], 0, X, [H1|T], Bool, Bool2):-
 	(Bool2 is 0,
-		((H \='o',
-		Bool = 'Nao pode jogar por cima de outras pecas...Jogue outra vez',
-		H1 = H, Bool = 0);
-		H1 = X, Bool = 1));
+		nl,nl,nl,write('dfsfs = '),write(H),nl,nl,nl,
+		((H \='o', H1 = H, Bool is 0);
+		H1 = X, Bool is 1));
 	(Bool2 is 1,  H1 = X);
 	(Bool2 is 2, 
 		(H== ' ', H1 = X);
