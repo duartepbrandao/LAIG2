@@ -23,6 +23,7 @@ LightingScene::LightingScene(vector<Light*> lights, Globals* globals,vector<Came
 			camera=i;
 		}
 	}
+	scene_cameras.clear();
 	scene_cameras.insert(scene_cameras.end(),cameras.begin(),cameras.end());
 	this->id=id;
 	this->scene=scene;
@@ -86,6 +87,7 @@ void LightingScene::init()
 	glEnable (GL_NORMALIZE);
 
 	setUpdatePeriod(10);
+	
 }
 
 void LightingScene::display() 
@@ -100,7 +102,6 @@ void LightingScene::display()
 	glLoadIdentity();
 
 	// Apply transformations corresponding to the camera position relative to the origin
-	CGFscene::activeCamera->applyView();
 	activateCamera(camera);
 	activeCamera->applyView();
 	//cameras
