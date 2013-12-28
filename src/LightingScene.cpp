@@ -387,6 +387,9 @@ void LightingScene::undo()
 {
 	if (pecas.size()>0)
 	{
-		pecas.pop_back();
+		Peca* removida = pecas.pop_back();
+		if ()
+		{
+		}
 	}
 }
