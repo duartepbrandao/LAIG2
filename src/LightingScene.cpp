@@ -382,14 +382,3 @@ void LightingScene::setLightState(int pos, int value){
 int LightingScene::getLightState(int pos){
 	return lightState[pos];
 }
-
-void LightingScene::undo()
-{
-	if (pecas.size()>0)
-	{
-		Peca* removida = pecas.pop_back();
-		if ()
-		{
-		}
-	}
-}

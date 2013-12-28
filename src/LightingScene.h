@@ -72,7 +72,6 @@ public:
 
 	void loadTheme(int num);
 	void loadPecaTheme();
-	void undo();
 };
 
 #endif

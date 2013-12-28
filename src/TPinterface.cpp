@@ -103,7 +103,7 @@ void TPinterface::processGUI(GLUI_Control *ctrl)
 		((LightingScene*) scene)->appChoose=false;
 		break;
 	case 5:
-		((LightingScene*)scene)->undo();
+		undo();
 	};
 }
 
@@ -278,8 +278,8 @@ void TPinterface::processHits (GLint hits, GLuint buffer[])
 		char ans[128];
 		TwixtSocket::recebe(ans);
 
-		char s2[8727];
-		sprintf (s2, "replaceMatrix(%s, %d, %d,'%c',_, _, 0).\n", board, (selected[0]+1)*2, (selected[1]+1)*8+4,letra);
+		char s2[8800];
+		sprintf (s2, "replaceMatrix(%s, %d, %d,'%c',_, _, 0).\n", board, (selected[0]+1)*2, (selected[1])*8+4,letra);
 		TwixtSocket::envia(s2, strlen(s2));
 		char ans2[8800];
 		TwixtSocket::recebe(ans2);
@@ -428,3 +428,23 @@ void TPinterface::loadPecasPlayer2(float deltaX, float deltaY){
 	((LightingScene*) scene)->pecas[((LightingScene*) scene)->pecas.size()-1]->setPosy(deltaY);
 }
 
+
+
+void TPinterface::undo(){
+	if (((LightingScene*) scene)->pecas.size()>0){
+
+		float x = (((LightingScene*) scene)->pecas[((LightingScene*) scene)->pecas.size()-1]->getPosX()-3.05-1.5/2)/2.57/1.5;
+		float y = (((LightingScene*) scene)->pecas[((LightingScene*) scene)->pecas.size()-1]->getPosY()-3.1-1.5/2)/2.57/1.5;
+		x=(x+1)*2;
+		y=y*8+4;
+
+		char s3[8727];
+		sprintf (s3, "replaceMatrix(%s, %d, %d,'o',_, _, 1).\n", board, (int)x, (int)y);
+		TwixtSocket::envia(s3, strlen(s3));
+		char ans3[8800];
+		TwixtSocket::recebe(ans3);
+
+		sscanf(ans3,"%[^.]", board);
+		((LightingScene*) scene)->pecas.pop_back();
+	}
+}

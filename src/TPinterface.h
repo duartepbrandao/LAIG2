@@ -31,6 +31,7 @@ class TPinterface: public CGFinterface {
 		void loadSombraPlayer1();
 		void loadSombraPlayer2();
 		void processPassiveMouseMoved(int x,int y);
+		void undo();
 };
 
 
